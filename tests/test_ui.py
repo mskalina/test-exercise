@@ -2,7 +2,9 @@ import pytest
 from selenium import webdriver
 from main_page import MainPage
 
+# TO DO: to improve link can be set by arguments when running tests
 LINK = "http://localhost:8080/"
+# TO DO: test bins should be chosen randomly to improve test results
 TEST_BIN_FULL = "300234"
 TEST_BIN_NOT_FULL = "103003"
 

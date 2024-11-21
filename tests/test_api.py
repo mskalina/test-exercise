@@ -1,8 +1,10 @@
 import pytest
 import requests
 
+# TO DO: to improve link can be set by arguments when running tests
 LINK = "http://localhost:8080/"
 GET_INFO = "get-info"
+# TO DO: test binss should be chosen randomly to improve test results
 TEST_BIN_FULL = "300234"
 TEST_BIN_NOT_FULL = "103003"
 UNKNOWN_BIN = "103004"
@@ -10,7 +12,7 @@ EXPECTED_FIELDS = ["bin", "brand", "type", "category", "issuer", "alpha_2", "alp
                    "longitude", "bank_phone", "bank_url"]
 
 
-def test_post_with_epmty_body():
+def test_post_with_empty_body():
     r = requests.post(LINK+GET_INFO, json={})
     r_data = r.json()
     assert r_data.get('detail') == "Empty request body"
@@ -37,7 +39,7 @@ def test_provide_invalid_bin_and_get_error(invalid_bin, error_text):
 
 
 @pytest.mark.parametrize("valid_bin", [TEST_BIN_FULL, TEST_BIN_NOT_FULL])
-def test_provide_invalid_bin_and_get_error(valid_bin):
+def test_provide_valid_bin(valid_bin):
     r = requests.post(LINK+GET_INFO, json={"bin_number": valid_bin})
     r_data = r.json()
     if r_data.get('data') is not None:
